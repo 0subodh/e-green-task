@@ -20,6 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: 'Everything Green',
     description: 'Authentication example with NextAuth and Google',
+    verification: {
+        google: 'google91bc956b22e8c444.html',
+    },
 }
 
 export default async function RootLayout({
@@ -56,12 +59,12 @@ export default async function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
             >
                 <header className="w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 shadow-sm">
-                    <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+                    <div className="w-full px-4 py-3 flex items-center justify-between">
                         <Link
                             href="/"
-                            className="font-semibold text-gray-900 dark:text-gray-100"
+                            className="font-bold text-2xl text-green-600 hover:text-green-700 transition"
                         >
-                            Green Everything
+                            Everything Green
                         </Link>
                         <nav className="flex items-center gap-4">
                             {user ? (
@@ -139,9 +142,7 @@ export default async function RootLayout({
                         </nav>
                     </div>
                 </header>
-                <main className="flex-1 flex items-center justify-center">
-                    {children}
-                </main>
+                <main className="flex-1 w-full">{children}</main>
                 <Footer />
             </body>
         </html>

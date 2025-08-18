@@ -1,13 +1,11 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import GoogleAPIDashboard from '@/components/dashboard/GoogleAPIDashboard'
+import SimpleGoogleAPIDashboard from '@/components/dashboard/SimpleGoogleAPIDashboard'
 
 const HomePage = async () => {
     const session = await auth()
     if (!session?.user) redirect('/')
 
-    return (
-        <GoogleAPIDashboard />
-    )
+    return <SimpleGoogleAPIDashboard />
 }
 export default HomePage
