@@ -33,7 +33,7 @@ Required OAuth scopes (configured by the app during sign-in):
 
 ### 2) Clone and install
 ```bash
-npm install
+git clone https://github.com/0subodh/e-green-task.git
 ```
 
 ### 3) Environment variables
@@ -100,7 +100,7 @@ Ensure AUTH_URL (or NEXTAUTH_URL) is set to your deployment URL and the same red
 - src/app/page.tsx: Login page; redirects authenticated users to /home.
 - src/app/home/page.tsx: Protected page that renders the dashboard UI.
 - src/components/dashboard/SimpleGoogleAPIDashboard.tsx: UI to input Property ID and Site URL and fetch data.
-- src/config/env.ts: Environment variable mapping and validation helpers.
+
 
 ## Troubleshooting
 - Callback URI mismatch: Ensure AUTH_URL/NEXTAUTH_URL matches your actual domain and the redirect URI in Google Cloud is exactly {BASE_URL}/api/auth/callback/google.
@@ -108,4 +108,4 @@ Ensure AUTH_URL (or NEXTAUTH_URL) is set to your deployment URL and the same red
 - 403/permission errors from Google APIs: Verify the signed-in Google account has access to the GA4 property and the Search Console property, and that the requested scopes were granted.
 
 ## License
-MIT (or project’s license, if different).
+MIT .
