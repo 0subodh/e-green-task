@@ -1,38 +1,24 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import Image from 'next/image'
-import Logout from '@/components/Logout'
 
 const HomePage = async () => {
     const session = await auth()
     if (!session?.user) redirect('/')
 
-    const user = session!.user
-    const displayName = user?.name ?? 'User'
-    const imageSrc = typeof user?.image === 'string' && user.image.length > 0 ? user.image : null
+    const user = session.user
+    // Derive first name only, capitalized. Fallback to email local-part or "User".
+    const sourceName = (user?.name && user.name.trim()) || (user?.email && user.email.trim()) || 'User'
+    const base = sourceName.includes('@') ? sourceName.split('@')[0] : sourceName
+    const token = base
+        .replace(/[._-]+/g, ' ')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)[0] || 'User'
+    const firstName = token.charAt(0).toUpperCase() + token.slice(1).toLowerCase()
 
     return (
-        <div className="flex flex-col items-center m-4">
-            <h1>{displayName}</h1>
-            {imageSrc ? (
-                <Image
-                    src={imageSrc}
-                    alt={`${displayName}'s profile photo`}
-                    width={80}
-                    height={80}
-                    className="rounded-full"
-                />
-            ) : (
-                <div
-                    className="rounded-full bg-gray-200 flex items-center justify-center"
-                    style={{ width: 80, height: 80 }}
-                    aria-label={`${displayName} has no profile photo`}
-                    role="img"
-                >
-                    {displayName.charAt(0).toUpperCase()}
-                </div>
-            )}
-            <Logout />
+        <div className="flex flex-col items-center m-10">
+            <h1 className="text-3xl font-semibold">Welcome, {firstName}</h1>
         </div>
     )
 }
