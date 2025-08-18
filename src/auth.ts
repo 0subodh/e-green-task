@@ -7,6 +7,9 @@ export const {
     signIn,
     signOut,
 } = NextAuth({
+    // Trust the host in production builds to avoid UntrustedHost errors
+    // Prefer setting AUTH_URL to your deployment URL in real deployments
+    trustHost: true,
     providers: [
         Google({
             clientId: process.env.GOOGLE_CLIENT_ID,
